@@ -3,7 +3,10 @@ import selection from "/src/js/selection.js";
 import niveau1 from "/src/js/niveau1.js";
 import niveau2 from "/src/js/niveau2.js";
 import niveau3 from "/src/js/niveau3.js";
-
+import gameOver1 from "/src/js/gameOver1.js";
+import gameOver2 from "/src/js/gameOver2.js";
+import Victoire1 from "/src/js/Victoire1.js";
+import Victoire2 from "/src/js/Victoire2.js";
 // configuration générale du jeu
 var config = {
   type: Phaser.AUTO,
@@ -20,12 +23,12 @@ var config = {
     arcade: {
       // parametres du mode arcade
       gravity: {
-        y: 300 // gravité verticale : acceleration ddes corps en pixels par seconde
+        y: 300// gravité verticale : acceleration ddes corps en pixels par seconde
       },
-      debug: true // permet de voir les hitbox et les vecteurs d'acceleration quand mis à true
+      debug: true// permet de voir les hitbox et les vecteurs d'acceleration quand mis à true
     }
   },
-  scene: [selection, niveau1, niveau2, niveau3]
+  scene: [selection, gameOver1, gameOver2, niveau1, niveau2, niveau3, Victoire1, Victoire2]
 };
 
 // création et lancement du jeu

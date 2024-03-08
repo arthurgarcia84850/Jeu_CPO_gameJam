@@ -1,3 +1,6 @@
+import * as fct from "/src/js/fonctions.js";
+
+
 export default class niveau2 extends Phaser.Scene {
   // constructeur de la classe
   constructor() {
@@ -5,49 +8,41 @@ export default class niveau2 extends Phaser.Scene {
       key: "niveau2" //  ici on précise le nom de la classe en tant qu'identifiant
     });
   }
-  preload() {}
+  preload() {
+    this.load.image("img_regles", "src/assets/regles.png")
+    this.load.image("btn_retour", "src/assets/btnretour.png")
+   
+  }
 
   create() {
-    this.add.image(400, 300, "img_ciel");
-    this.groupe_plateformes = this.physics.add.staticGroup();
-    this.groupe_plateformes.create(200, 584, "img_plateforme");
-    this.groupe_plateformes.create(600, 584, "img_plateforme");
-    // ajout d'un texte distintcif  du niveau
-    this.add.text(400, 100, "Vous êtes dans le niveau 2", {
-      fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
-      fontSize: "22pt"
-    });
+    fct.doNothing();
+    fct.doAlsoNothing();
 
-    this.porte_retour = this.physics.add.staticSprite(100, 550, "img_porte2");
+   
 
-    this.player = this.physics.add.sprite(100, 450, "img_perso");
-    this.player.refreshBody();
-    this.player.setBounce(0.2);
-    this.player.setCollideWorldBounds(true);
-    this.clavier = this.input.keyboard.createCursorKeys();
-    this.physics.add.collider(this.player, this.groupe_plateformes);
-  }
+   
+      
+    this.add.image(400, 300, "img_regles");
+   
+    let imgBoutonAccueil = this.add.image(750, 50, 'btn_retour');
+
+      // Rendre l'image cliquable
+      imgBoutonAccueil.setInteractive({ useHandCursor: true });
+      
+      // Ajouter un écouteur d'événement sur le 'clic'
+      imgBoutonAccueil.on('pointerdown', function() {
+          // Redémarrer la scène 'selection' lorsqu'on clique sur le bouton
+          window.location.reload();
+      }, this);
+
+      }  
+ 
+    
+
 
   update() {
-    if (this.clavier.left.isDown) {
-      this.player.setVelocityX(-160);
-      this.player.anims.play("anim_tourne_gauche", true);
-    } else if (this.clavier.right.isDown) {
-      this.player.setVelocityX(160);
-      this.player.anims.play("anim_tourne_droite", true);
-    } else {
-      this.player.setVelocityX(0);
-      this.player.anims.play("anim_face");
-    }
-    if (this.clavier.up.isDown && this.player.body.touching.down) {
-      this.player.setVelocityY(-330);
-    }
+    
 
-    if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
-      if (this.physics.overlap(this.player, this.porte_retour)) {
-        console.log("niveau 3 : retour vers selection");
-        this.scene.switch("selection");
-      }
-    }
   }
 }
+
